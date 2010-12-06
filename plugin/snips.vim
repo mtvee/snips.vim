@@ -145,12 +145,20 @@ fun! s:expand_line( line, path )
         let replaced = strftime("%a, %d %b %Y %H:%M:%S %z")
       elseif mlist[1] ==# 'username'  
         let replaced = s:get_username()
+      else
+        " no match to we put it back with a wierd placeholder
+        " this still eats whitespace in the original text tho
+        let replaced = "<--%" . mlist[1] . "%-->"
       endif
     endif
     let line = substitute( line, regex, replaced, '')
     let mlist = matchlist( line, regex )
     call filter( mlist, '! empty(v:val)')
   endwhile
+
+  " replace any of our placeholders
+  let line = substitute(line, '<--%', '<%', '')
+  let line = substitute(line, '%-->', '%>', '')
 
   return line
 endfunction
