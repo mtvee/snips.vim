@@ -1,0 +1,125 @@
+*Snips.txt*        A simple snippets system for vim
+
+==============================================================================
+CONTENTS                                                      *Snips-contents*
+
+    1. Intro.....................................|SnipsIntro|
+    2. Snips.....................................|SnipsSnips|
+    3. Templates.................................|SnipsTemplates|
+    4. Change Log................................|SnipsChangeLog|
+    5. Credits...................................|SnipsCredits|
+    6. About.....................................|SnipsAbout|
+    7. License...................................|SnipsLicense|
+
+==============================================================================
+1. Intro                                                          *SnipsIntro*
+
+Snips is a simple snippet system for vim. You write plain text files that can
+be inserted into your document easily when your cursor is under a snippet word.
+Snips can contain variables also that will be matched and transformed, a simple 
+template system.
+
+==============================================================================
+2. Snips                                                          *SnipsSnips*
+
+Snips are plain text files. Umm, that's about it really.
+
+You put them in your vim home, under the snips directory. Snippet files are
+organized into directories based on the filetype, so snippets for vim files
+would be under ~/.vim/snips/vim/... and for php would be ~/.vim/snips/php/...
+Snippet files are called TRIGGER.snip where TRIGGER is the name you want to
+use for a trigger.
+
+Probably the best way to explain things is with an example. Create a file
+called ~/.vim/snips/vim/plugin.snip and put in the following text:
+
+  "         Name: <%filename%>
+  " Last Changed: <% timestamp %>
+  "
+  if exists('loaded_<%filename%>')
+    finish
+  endif
+  let loaded_<%filename%>=1
+
+Ok, now open a new file and type the word 'plugin', leave the cursor on the
+word and then ':call ExpandSnippet()'.
+
+I have that mapped to F2 in my '.vimrc' this way:
+
+ nmap <F2> :call ExpandSnippet()<CR>
+ imap <F2> <Esc>:call ExpandSnippet()<CR>i
+
+
+==============================================================================
+3. Templates                                                  *SnipsTemplates*
+
+Snips can have optional tags that get expanded when the snippet is
+inserted. Tags are surrounded by <% TAG %>. 
+
+   <% eval:code %>
+    will expand to the result value of 'code', which can be any vimscript
+    that returns a string somehow.
+
+    e.g. <%eval:strftime('%Y-%m-%d')%>
+
+   <% date %>
+    expands to current date (%Y-%m-%d)
+
+   <% time %>
+    expands to current time (%I:%M %p)
+
+   <% timestamp %>
+    expands to rfc822 style datetime
+
+   <% path %>
+    will expand to the current file path
+
+   <% filename %>
+    will expand to the current filename
+
+   <% username %>
+    will expand to the current user @ computer/hostname  
+
+==============================================================================
+4. Change Log                                                 *SnipsChangeLog*
+
+0.0.1
+  - initial code
+
+==============================================================================
+5. Credits                                                      *SnipsCredits*
+
+  Tyru - vimtemplate 
+    http://www.vim.org/scripts/script.php?script_id=2615
+
+  Michael Sanders - SnipMate
+    http://www.vim.org/scripts/script.php?script_id=2540
+
+
+==============================================================================
+6. About                                                          *SnipsAbout*
+
+Well, it's like this, after 20 years of emacs and 3 years of Textmate and a 
+week of Vim, I have decided to use Vim for everything now. Trouble is, I got real
+used to Textmate's snippet thing and so I figured, how better to learn what's
+under the hood than to write something and stick it under the hood.
+
+Basically, knowing nothing about vimscript, I took apart two scripts, scraped
+off the stuff I wasn't interested in and frankensteined them together. SnipMate
+and vimtemplate are great but I wanted to learn and I wanted to do things a
+little differently, that's all.
+
+You can find the code at github, if you are inclined. I might do work on it
+from time to time.
+
+  http://github.com/mtvee/snips.vim
+
+You can reach me at emptyvee AT gmail DOT com if you are inclined.
+
+==============================================================================
+8. License                                                      *SnipsLicense*
+
+Snips is released under the MIT licence. Do whatever you want basically.
+  
+  http://www.opensource.org/licenses/mit-license.php
+
