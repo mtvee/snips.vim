@@ -74,6 +74,9 @@ inserted. Tags are surrounded by <% TAG %>.
    <% path %>
     will expand to the current file path
 
+   <% filepart %>
+    will expand to the current filename without the extension
+
    <% filename %>
     will expand to the current filename
 

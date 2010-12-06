@@ -44,6 +44,9 @@
 "   <%path%>
 "     will expand to the current file path
 "
+"   <%filepart%>
+"     will expand to the current filename without the extension
+"
 "   <%filename%>
 "     will expand to the current filename
 "
@@ -64,7 +67,7 @@
 " -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 if exists("did_load_snips")
-  finish
+""  finish
 endif
 
 let did_load_snips = 1
@@ -130,6 +133,8 @@ fun! s:expand_line( line, path )
     else
       if mlist[1] ==# 'path'
         let replaced = path
+      elseif mlist[1] ==# 'filepart'
+        let replaced = fnamemodify( path, ':t:r' )
       elseif mlist[1] ==# 'filename'
         let replaced = fnamemodify( path, ':t' )
       elseif mlist[1] ==# 'date'
