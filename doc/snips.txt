@@ -103,7 +103,7 @@ inserted. Tags are surrounded by <% TAG %>.
 6. About                                                          *SnipsAbout*
 
 Well, it's like this, after 20 years of emacs and 3 years of Textmate and a 
-week of Vim, I have decided to use Vim for everything now. Trouble is, I got real
+week of Vim, I have decided to use Vim for for a bit. Trouble is, I got real
 used to Textmate's snippet thing and so I figured, how better to learn what's
 under the hood than to write something and stick it under the hood.
 
@@ -117,7 +117,7 @@ from time to time.
 
   http://github.com/mtvee/snips.vim
 
-You can reach me at emptyvee AT gmail DOT com if you are inclined.
+You can reach me at emptyvee AT gmail DOT com. 
 
 ==============================================================================
 8. License                                                      *SnipsLicense*

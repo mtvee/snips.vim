@@ -12,6 +12,8 @@
 "
 "   Snippets replace the trigger word that the cursor is on, verbatim, and can
 "   also do some simple template expansions (see below).
+" 
+"   Tags that are not known are left in the text.
 "
 " Example:
 "
@@ -45,10 +47,10 @@
 "     will expand to the current file path
 "
 "   <%filepart%>
-"     will expand to the current filename without the extension
+"     expands to the current filename without the extension
 "
 "   <%filename%>
-"     will expand to the current filename
+"     expands to the current filename
 "
 "   <%username%>
 "     attempt to return the username. Cross plat is always
@@ -146,7 +148,7 @@ fun! s:expand_line( line, path )
       elseif mlist[1] ==# 'username'  
         let replaced = s:get_username()
       else
-        " no match to we put it back with a wierd placeholder
+        " no match so we put it back with a wierd placeholder
         " this still eats whitespace in the original text tho
         let replaced = "<--%" . mlist[1] . "%-->"
       endif
@@ -165,7 +167,7 @@ endfunction
 
 " 
 " Try and find a snippet that matches the word at the cursor and insert it
-"
+" return 1 if a snippet was found or 0 if not 
 fun! ExpandSnippet( )
   if !s:init_snips()
     return
